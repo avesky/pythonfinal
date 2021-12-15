@@ -1,6 +1,16 @@
+"""
+Program: kickindoor.py
+Author: Andy Volesky
+Last date modified: 12/14/2021
+
+The purpose of this program:
+
+Make a dungeon crawl style game.
+
+"""
+
 from random import randint
 import random
-import sys
 
 char = dict(lvl=1, hp=50, atk=5, defense = 0)
 char_inv = {}
@@ -48,21 +58,29 @@ def loot():
     if char['lvl'] == 2 or char['lvl'] == 3:
         print(i_lvl1)
         item_choice = input('Choose loot: ')
+        if item_choice != '+1 sword' and item_choice != '+1 helm' and item_choice != '+1 boots' and item_choice != '+1 chest' and item_choice != '+1 shield' and item_choice != 'Healing Potion' and item_choice != '+2 sword' and item_choice != '+2 helm' and item_choice != '+2 boots' and item_choice != '+2 chest' and item_choice != '+2 shield' and item_choice != '+3 sword' and item_choice != '+3 helm' and item_choice != '+3 boots' and item_choice != '+3 chest' and item_choice != '+3 shield' and item_choice != '+4 sword' and item_choice != '+4 helm' and item_choice != '+4 boots' and item_choice != '+4 chest' and item_choice != '+4 shield':
+            item_choice = input('Choose loot: ')
         char_inv[item_choice] = i_lvl1[item_choice]
         print(f'Your inventory contains {char_inv}')
     elif char['lvl'] == 4 or char['lvl'] == 5 or char['lvl'] == 6:
         print(i_lvl2)
         item_choice = input('Choose loot: ')
+        if item_choice != '+1 sword' and item_choice != '+1 helm' and item_choice != '+1 boots' and item_choice != '+1 chest' and item_choice != '+1 shield' and item_choice != 'Healing Potion' and item_choice != '+2 sword' and item_choice != '+2 helm' and item_choice != '+2 boots' and item_choice != '+2 chest' and item_choice != '+2 shield' and item_choice != '+3 sword' and item_choice != '+3 helm' and item_choice != '+3 boots' and item_choice != '+3 chest' and item_choice != '+3 shield' and item_choice != '+4 sword' and item_choice != '+4 helm' and item_choice != '+4 boots' and item_choice != '+4 chest' and item_choice != '+4 shield':
+            item_choice = input('Choose loot: ')
         char_inv[item_choice] = i_lvl2[item_choice]
         print(f'Your inventory contains {char_inv}')
     elif char['lvl'] == 7 or char['lvl'] == 8 or char['lvl'] == 9:
         print(i_lvl3)
         item_choice = input('Choose loot: ')
+        if item_choice != '+1 sword' and item_choice != '+1 helm' and item_choice != '+1 boots' and item_choice != '+1 chest' and item_choice != '+1 shield' and item_choice != 'Healing Potion' and item_choice != '+2 sword' and item_choice != '+2 helm' and item_choice != '+2 boots' and item_choice != '+2 chest' and item_choice != '+2 shield' and item_choice != '+3 sword' and item_choice != '+3 helm' and item_choice != '+3 boots' and item_choice != '+3 chest' and item_choice != '+3 shield' and item_choice != '+4 sword' and item_choice != '+4 helm' and item_choice != '+4 boots' and item_choice != '+4 chest' and item_choice != '+4 shield':
+            item_choice = input('Choose loot: ')
         char_inv[item_choice] = i_lvl3[item_choice]
         print(f'Your inventory contains {char_inv}')
     elif char['lvl'] == 10 or char['lvl'] == 11 or char['lvl'] == 12:
         print(i_lvl4)
         item_choice = input('Choose loot: ')
+        if item_choice != '+1 sword' and item_choice != '+1 helm' and item_choice != '+1 boots' and item_choice != '+1 chest' and item_choice != '+1 shield' and item_choice != 'Healing Potion' and item_choice != '+2 sword' and item_choice != '+2 helm' and item_choice != '+2 boots' and item_choice != '+2 chest' and item_choice != '+2 shield' and item_choice != '+3 sword' and item_choice != '+3 helm' and item_choice != '+3 boots' and item_choice != '+3 chest' and item_choice != '+3 shield' and item_choice != '+4 sword' and item_choice != '+4 helm' and item_choice != '+4 boots' and item_choice != '+4 chest' and item_choice != '+4 shield':
+            item_choice = input('Choose loot: ')
         char_inv[item_choice] = i_lvl4[item_choice]
         print(f'Your inventory contains {char_inv}')
 
@@ -70,6 +88,8 @@ def loot():
 def equip():
     print(f'You have {char_inv} in your inventory and are wearing {equipped_wep} {equipped_armor}')
     to_equip = input("Enter an item to equip: ")
+    if to_equip != '+1 sword' and  to_equip != '+1 helm' and to_equip != '+1 boots' and to_equip != '+1 chest' and to_equip != '+1 shield' and to_equip != 'Healing Potion' and to_equip != '+2 sword' and  to_equip != '+2 helm' and to_equip != '+2 boots' and to_equip != '+2 chest' and to_equip != '+2 shield' and to_equip != '+3 sword' and  to_equip != '+3 helm' and to_equip != '+3 boots' and to_equip != '+3 chest' and to_equip != '+3 shield' and to_equip != '+4 sword' and  to_equip != '+4 helm' and to_equip != '+4 boots' and to_equip != '+4 chest' and to_equip != '+4 shield':
+        to_equip = input("Enter an item to equip: ")
     if to_equip in char_inv.keys() and 'sword' in to_equip:
         equipped_wep[to_equip] = char_inv[to_equip]
         char_inv.pop(to_equip)
@@ -78,6 +98,7 @@ def equip():
         char_inv.pop(to_equip)
     print(f'You have {char_inv} in your inventory and are wearing {equipped_wep} {equipped_armor}')
     #5 is base character attack
+    #0 is base character defense
     char['atk'] = 5
     char['defense'] = 0
     for value in equipped_wep.values():
@@ -119,11 +140,12 @@ def combat():
         monster = m_lvl4[rand_monster]
         m_lvl4.pop(rand_monster)
     print(f'You kick in the door and see a {monster["name"]}. Prepare to fight!')
-    while monster['hp'] > 1:
+    while monster['hp'] > 0:
         combat_choice = input('What would you like to do? Available actions are: Attack, Block, Parry: ')
         # input validation
-        if combat_choice != 'Attack' or combat_choice != 'Block' or combat_choice != 'Parry':
+        if combat_choice != 'Attack' and combat_choice != 'Block' and combat_choice != 'Parry':
             combat_choice = input('What would you like to do? Available actions are: Attack, Block, Parry: ')
+        print(combat_choice)
         if combat_choice == 'Attack' and rand_action() == 'Attack':
             char['hp'] = char['hp'] - (monster['atk'] - char['defense'])
             monster['hp'] = monster['hp'] - (char['atk'] - monster['defense'])
@@ -188,7 +210,7 @@ def enter_command():
     while command != 'Kick in Door':
         command = input('What would you like to do? Available actions are: Inventory, Equip, Use Potion, Stats, Kick in Door: ')
         #input validation
-        if command != 'Inventory' or command != 'Equip' or command != 'Use Potion' or command != 'Stats' or command != 'Kick in Door':
+        if command != 'Inventory' and command != 'Equip' and command != 'Use Potion' and command != 'Stats' and command != 'Kick in Door':
             command = input('What would you like to do? Available actions are: Inventory, Equip, Use Potion, Stats, Kick in Door: ')
         if command == 'Inventory':
             print(char_inv)
